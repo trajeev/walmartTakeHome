@@ -1,34 +1,45 @@
-import Head from "next/head";
-import Image from "next/image";
+import { useEffect, useState, useRef } from "react"
+import OrdersTable from "../components/orders/orders.compoent"
+import axios from "axios"
+import FilterOrders from "../components/switch/switch"
+// import '../../styles/globals.css'
 
-export default function Home() {
-  return (
-    <div>
-      <Head>
-        <title>Walmart Frontend Challenge</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <nav
-        style={{
-          display: "flex",
-          width: "100%",
-          height: "75px",
-          background: "#0071DC",
-        }}
-      >
-        <div
-          style={{
-            position: "relative",
-            paddingTop: "1rem",
-            paddingLeft: "1rem",
-          }}
-        >
-          <Image src="/sparkle.svg" alt="walmart logo" width={30} height={30} />
+export default function Orders () {
+    const [orders, setOrders] = useState([])
+    const [filter, switchFilter] = useState(true)
+    const orginalOrders = useRef([])
+
+    useEffect(() => {
+        axios.get('api/orders')
+            .then(response => {
+                setOrders((response.data))
+                orginalOrders.current = response.data
+            })        
+    },[])
+
+    if (!orders) {
+        return <div>...Loading</div>
+    }
+
+    const filterFunction = () => {
+        if (filter) {
+            const copy = [...orders]
+            const filteredOrders = copy.filter(order => order.isDeliveved === true)
+            setOrders(filteredOrders)
+            switchFilter(false)
+        }else {
+            setOrders(orginalOrders.current)
+            switchFilter(true)
+        }
+    }
+
+
+    return <div className = 'orders'>
+            <div className = 'orders-header'>
+                <h1 style = {{fontWeight: 'bold'}}>Orders ({orders.length})</h1>
+                <FilterOrders onchange = {filterFunction}/>
+            </div>
+            <OrdersTable orders = {orders} />
         </div>
-      </nav>
-      <div>
-        Walmart challenge
-      </div>
-    </div>
-  );
 }
+

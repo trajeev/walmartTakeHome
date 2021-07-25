@@ -14,3 +14,15 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.orders {
+  width: 80vw;
+  margin: auto;
+}
+
+.orders-header {
+  margin-top: 2vh;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5vh;
+}

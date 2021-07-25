@@ -1,0 +1,18 @@
+.modalbody {
+    display: flex;
+    overflow-y: auto;   
+}
+
+.modalbody::-webkit-scrollbar {
+    height: 5px;
+}
+
+.modalbody::-webkit-scrollbar-thumb {
+    background: rgb(161, 152, 152);
+    border-radius: 5px;
+}
+
+.modalbody::-webkit-scrollbar-track {
+    background-color: rgb(233, 227, 227);
+    height: 3px;
+}
