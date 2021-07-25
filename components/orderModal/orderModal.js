@@ -2,11 +2,16 @@ import {Modal,ModalOverlay,ModalContent,ModalHeader, ModalBody, ModalCloseButton
 import SingleItem from "../singleItem/singleItem"
 import classes from './orderModal.module.css'
 
+// This component displays Order Modal
 export default function OrderModal ({isOpen, onClose, order}) {
+    // This is checked to avoid error in rendering
     if (!order) {
         return null
     }
+
     const {id, orders} = order
+    
+    // Below function is used to calculate total price.
     function calculate () {
         let sum = 0
         console.log(orders)

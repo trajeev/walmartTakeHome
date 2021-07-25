@@ -5,16 +5,19 @@ import OrderModal from "../orderModal/orderModal"
 import classes from './orders.module.css'
 import axios from "axios"
 
+// This component is used to display orders in the form of table.
 export default function OrdersTable ({orders}) {
-    const {isOpen, onOpen, onClose} = useDisclosure()
+    const {isOpen, onOpen, onClose} = useDisclosure() //useDisclosure hook used to toggle order Modal
     const [order, setOrder] = useState()
-    const products = useRef()
+    const products = useRef() //useRef is used instead of useState to avoid rerendering.
 
+    // useEffect is used to collect products data from backend api
     useEffect(() => {
         axios.get('api/products')
         .then(response => products.current = response.data)
     },[])
 
+    // ModalOpen function is used to collect all products from an order.
     const ModalOpen = ({items, orderId}) => {
         onOpen()
         const foundItems = []
@@ -47,15 +50,16 @@ export default function OrdersTable ({orders}) {
                     </Tr>
                     {orders.map(order => {
                         const {orderCreatedAt} = order
+                        {/* Next few steps are used to format date to MM/DD/YYYY */}
                         let newDate = new Date(orderCreatedAt)
                         let month = newDate.getMonth() + 1 <10 ? '0' + (newDate.getMonth() + 1): newDate.getMonth() + 1
                         let day = newDate.getDate() < 10 ? '0' + newDate.getDate() : newDate.getDate()
                         let year = newDate.getFullYear()
                         newDate = month + '/' + day + '/' + year
-                        return <Tr key = {order.orderId} className = {classes.row} borderTop = '2px' borderColor = 'blackAlpha.400'>
+                        
+                        return <Tr key = {order.orderId} className = {classes.row} 
+                                borderTop = '2px' borderColor = 'blackAlpha.400'  onClick = {()=> ModalOpen(order)}>
                             <Td 
-                                onClick = {()=> ModalOpen(order)} 
-                                className = {classes.id}
                                 textAlign = "center">
                                 {order.orderId}
                             </Td>
