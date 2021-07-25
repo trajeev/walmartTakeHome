@@ -3,6 +3,7 @@ import OrdersTable from "../components/orders/orders.compoent"
 import axios from "axios"
 import FilterOrders from "../components/switch/switch"
 import { Spinner } from "@chakra-ui/spinner"
+import { Heading } from "@chakra-ui/react"
 
 // The main page where Orders are shown
 export default function Orders () {
@@ -41,7 +42,7 @@ export default function Orders () {
   return (
     <div className = 'orders'>
         <div className = 'orders-header'>
-            <h1 style = {{fontWeight: 'bold'}}>Orders ({orders.length})</h1>
+            <Heading size = "sm">Orders ({orders.length})</Heading>
             <FilterOrders onchange = {filterFunction}/>
         </div>
         <OrdersTable orders = {orders} />

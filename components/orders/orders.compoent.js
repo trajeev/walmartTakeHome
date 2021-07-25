@@ -36,9 +36,9 @@ export default function OrdersTable ({orders}) {
                 <Thead>
                     <Tr borderBottom = '2px' borderColor = 'blackalpha.600'>
                         <Th textAlign = "center" color = 'black' fontSize = {15} textTransform = 'none'>Order #</Th>
+                        <Th textAlign = "center" color = 'black' fontSize = {15} textTransform = 'none'>Customer ID</Th>
                         <Th textAlign = "center" color = 'black' fontSize = {15} textTransform = 'none'>Order Date</Th>
                         <Th textAlign = "center" color = 'black' fontSize = {15} textTransform = 'none'>Delivered</Th>
-                        <Th textAlign = "center" color = 'black' fontSize = {15} textTransform = 'none'>Customer ID</Th>
                     </Tr>
                 </Thead>
                 <Tbody>

@@ -14,7 +14,6 @@ export default function OrderModal ({isOpen, onClose, order}) {
     // Below function is used to calculate total price.
     function calculate () {
         let sum = 0
-        console.log(orders)
         for (const item of orders) {
             sum += item.quantity * item.linePrice
         }
@@ -22,7 +21,7 @@ export default function OrderModal ({isOpen, onClose, order}) {
     }
 
     return (
-        <Modal isOpen = {isOpen} onClose = {onClose} size = "4xl" scrollBehavior = "inside">
+        <Modal isOpen = {isOpen} onClose = {onClose} size = {["4xl"]} scrollBehavior = "inside">
             <ModalOverlay />
             <ModalContent h = {700}>
                 <ModalHeader>
@@ -30,7 +29,7 @@ export default function OrderModal ({isOpen, onClose, order}) {
                     <span style = {{fontWeight: '400'}}>{id}</span>
                 </ModalHeader>
                 <ModalCloseButton />
-                <ModalBody fontSize = 'small' width = '3xl' margin= 'auto'>
+                <ModalBody fontSize = 'small' width = '2xl' margin= 'auto'>
                     <div className = {classes.modalbody}>
                     {orders.map(list => (
                         <div key = {list.offerId}>
